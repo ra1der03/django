@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Каталог</h1>
+
+<h3>
+    Сортировать по:  <a href='http://127.0.0.1:8000/catalog?sort=name'>названию</a>
+    <a href='http://127.0.0.1:8000/catalog?sort=min_price'>начиная с дешевых</a>
+    <a href='http://127.0.0.1:8000/catalog?sort=max_price'>начиная с дорогих</a>
+</h3>
+
+<h1 >
+    <a href='http://127.0.0.1:8000/catalog/{{0.slug}}/' style="color:blue;"> {{0.name}}</a>
+    <a href='http://127.0.0.1:8000/catalog/{{1.slug}}/' style="color:blue;margin:190px;">{{ 1.name }}</a>
+    <a href='http://127.0.0.1:8000/catalog/{{2.slug}}/' style="color:blue;margin:70px;">{{ 2.name }}</a> </h1>
+<h2>
+    <strong style="margin:15px;"> Стоимость: {{ 0.price }}₽ </strong>
+    <strong style="margin:120px;"> Стоимость: {{ 1.price }}₽ </strong>
+    <strong style="margin:80px;"> Стоимость: {{ 2.price }}₽ </strong>
+</h2>
+<p>
+<img style="margin:30px" src="{{0.img}}" width="20%" height="30%" />
+<img style="margin:30px" src="{{1.img}}" width="20%" height="30%" />
+<img style="margin:30px" src="{{2.img}}"  width="20%" height="30%"/>
+</p>
+</body>
+</html>
