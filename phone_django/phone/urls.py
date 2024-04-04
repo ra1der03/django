@@ -16,8 +16,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from import_phones import data
 from phone_dj.views import create_phone, display_phone
 
 urlpatterns = [

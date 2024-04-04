@@ -10,3 +10,4 @@ class Phone(models.Model):
     release_date = models.DateField(max_length=10)
     lte_exists = models.BooleanField(default=True)
     slug = models.SlugField(max_length=100)
+
