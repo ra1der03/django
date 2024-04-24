@@ -1,32 +1,36 @@
 from django.contrib import admin
-from .models import Article, Tag, Scope
 from django.core.exceptions import ValidationError
-from django.forms import BaseInlineFormSet, forms
+
+from .models import Article, Tag, Scope
+from django import forms
 
 
-class ScopeInlineFormset(BaseInlineFormSet):
-    class Meta:
-        model = Scope
-# переопределению форм в лекции, к сожалению, внимания не уделили нисколько и соответственно, без
-# знаний об этом часть задания, касающуюся проверки главного тега, выполнить не удается. В остальном все в порядке
-    def save(self, *args, **kwargs):
-        data = args
-        if (i.is_main == "True" for i in data.scopes.all()) and (el.is_main == "True" for el in Scope.objects.all()):
-            raise forms.ValidationError('Главным может быть лишь один заголовок')
-        return super().clean()
+class InlineFormset(forms.models.BaseInlineFormSet):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.count = 0
+
+    def clean(self):
+        print(self.cleaned_data)
+        for el in self.cleaned_data:
+            if el.get('tag').is_main:
+                self.count += 1
+        if self.count > 1:
+            raise ValidationError("Coudn't add two main tag for one elem")
 
 
-class ScopeInLine(admin.TabularInline):
+class TagsInNews(admin.TabularInline):
     model = Scope
-    formset = ScopeInlineFormset
     extra = 2
+    formset = InlineFormset
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['id', 'title', 'text', 'published_at', 'image']
     list_filter = ['published_at']
-    inlines = [ScopeInLine]
+    inlines = [TagsInNews]
 
 
 @admin.register(Tag)
