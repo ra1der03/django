@@ -9,7 +9,7 @@ Content-Type: application/json
 ###
 
 # создание датчика
-POST {{baseUrl}}/sensors/
+POST {{baseUrl}}/sensors/add/
 Content-Type: application/json
 
 {
