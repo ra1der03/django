@@ -1,4 +1,5 @@
 from rest_framework import serializers
+<<<<<<< HEAD
 from students.models import Course, Student
 
 
@@ -21,15 +22,26 @@ class StudentSerializer(serializers.ModelSerializer):
         return instance
 
 
+=======
+
+from students.models import Course, Student
+
+
+>>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
 class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
+<<<<<<< HEAD
         fields = ('id', "name", "students")
+=======
+        fields = ("id", "name", "students")
+>>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
 
     def create(self, validated_data):
         return Course.objects.create(**validated_data)
 
+<<<<<<< HEAD
     def update(self, instance, validated_data, partial=True):
         students_data = validated_data.pop('students')
         student = instance.students
@@ -47,3 +59,32 @@ class CourseSerializer(serializers.ModelSerializer):
         student.save()
 
         return instance
+=======
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get(
+            'name', instance.name)
+        instance.students = validated_data.get(
+            'students', instance.students)
+        instance.save()
+
+        return instance
+
+
+class StudentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Student
+        fields = ("id", "student_name", "birth_date")
+
+    def create(self, validated_data):
+        return Student.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get(
+            'name', instance.name)
+        instance.students = validated_data.get(
+            'students', instance.students)
+        instance.save()
+
+        return instance
+>>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e

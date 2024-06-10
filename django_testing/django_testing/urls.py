@@ -17,12 +17,20 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
+<<<<<<< HEAD
 from students.views import CoursesViewSet, StudentViewSet
 
 router = DefaultRouter()
 router.register("courses", CoursesViewSet, basename="courses")
 router.register("students", StudentViewSet, basename="students")
 router.register('courses/<pk>/', CoursesViewSet)
+=======
+from students.views import CoursesViewSet
+
+router = DefaultRouter()
+router.register("courses", CoursesViewSet, basename="courses")
+# router.register('courses/<pk>/', CoursesViewSet)
+>>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+<<<<<<<< HEAD:django_testing/.idea/misc.xml
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (django_testing)" project-jdk-type="Python SDK" />
+========
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (venv)" project-jdk-type="Python SDK" />
+>>>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e:api_with_restrictions/.idea/misc.xml
+=======
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (venv)" project-jdk-type="Python SDK" />
+>>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
   </component>
