@@ -1,11 +1,8 @@
 import pytest
 from rest_framework.test import APIClient
 from model_bakery import baker
-<<<<<<< HEAD
 import json
-=======
 
->>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
 from students.models import Student, Course
 
 
@@ -32,7 +29,6 @@ def course_factory():
 def test_cources(client, student_factory, course_factory):
     students = student_factory(_quantity=2)
     courses = course_factory(_quantity=2)
-<<<<<<< HEAD
     for i, student in enumerate(students):
         client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
         for course in courses:
@@ -87,31 +83,10 @@ def test_name(client, student_factory, course_factory):
         client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
         for course in courses:
             client.post('/courses/', data={'name': course.name, 'students_id': [1, 2]})
-=======
-    for student in students:
-        client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
-        for course in courses:
-            client.post('/courses/', data={'name': course.name, 'students_id': '1'})
 
-    response = client.get('/courses/1/')
-    assert response.status_code == 200
-
-    response = client.get('/courses/')
-    assert response.status_code == 200
-
-    data = response.json()
-    assert len(data) == len(courses)
-
-    response = client.get('/courses/?id=2')
-    data = response.json()
-    assert data[0]['id'] == 2
-
->>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
     response = client.get('/courses/?name='+courses[1].name)
     data = response.json()
     assert data[0]['name'] == courses[1].name
-
-<<<<<<< HEAD
 
 @pytest.mark.django_db
 def test_create(client):
@@ -142,7 +117,7 @@ def test_remove(client, student_factory, course_factory):
             client.post('/courses/', data={'name': course.name, 'students_id': [1, 2]})
     response = client.delete('http://127.0.0.1:8000/courses/1/')
     assert response.status_code == 204
-=======
+
     response = client.post('/courses/', data={'name': 'DJANGO', 'students': [1, 2]})
     assert response.status_code == 201
 
@@ -151,4 +126,4 @@ def test_remove(client, student_factory, course_factory):
 
     response = client.delete('/courses/3/')
     assert response.status_code == 204
->>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
+
