@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-<<<<<<< HEAD
 import os
 from pathlib import Path
 import django
@@ -20,15 +19,7 @@ os.environ.setdefault(
 )
 
 
-=======
 
-import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", __file__)
-
-
-from pathlib import Path
-import django
->>>>>>> b384975f6822368497afa684c0352ef1ae7dae6e
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
