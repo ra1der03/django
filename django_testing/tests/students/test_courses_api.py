@@ -41,10 +41,6 @@ def test_cources(client, student_factory, course_factory):
 def test_list(client, student_factory, course_factory):
     students = student_factory(_quantity=2)
     courses = course_factory(_quantity=2)
-    for i, student in enumerate(students):
-        client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
-        for course in courses:
-            client.post('/courses/', data={'name': course.name, 'students_id': i})
     response = client.get('/courses/')
     assert response.status_code == 200
 
@@ -53,10 +49,6 @@ def test_list(client, student_factory, course_factory):
 def test_full(client, student_factory, course_factory):
     students = student_factory(_quantity=2)
     courses = course_factory(_quantity=2)
-    for i, student in enumerate(students):
-        client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
-        for course in courses:
-            client.post('/courses/', data={'name': course.name, 'students_id': i})
     response = client.get('/courses/')
     data = response.json()
     assert len(data) == len(courses)
@@ -66,11 +58,7 @@ def test_full(client, student_factory, course_factory):
 def test_id(client, student_factory, course_factory):
     students = student_factory(_quantity=2)
     courses = course_factory(_quantity=2)
-    for i, student in enumerate(students):
-        client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
-        for course in courses:
-            client.post('/courses/', data={'name': course.name, 'students_id': [1, 2]})
-    response = client.get('/courses/?id='+str(courses[1].id))
+    response = client.get('/courses/', {'id': courses[1].id})
     data = response.json()
     assert data[0]['id'] == courses[1].id
 
@@ -79,35 +67,27 @@ def test_id(client, student_factory, course_factory):
 def test_name(client, student_factory, course_factory):
     students = student_factory(_quantity=2)
     courses = course_factory(_quantity=2)
-    for i, student in enumerate(students):
-        client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
-        for course in courses:
-            client.post('/courses/', data={'name': course.name, 'students_id': [1, 2]})
-
-    response = client.get('/courses/?name='+courses[1].name)
+    response = client.get('/courses/', {'name': courses[1].name}, headers={"accept": "application/json"})
     data = response.json()
     assert data[0]['name'] == courses[1].name
 
+
 @pytest.mark.django_db
-def test_create(client):
-    Student.objects.create(student_name='dude', birth_date='2003-05-03')
-    response = client.post('http://127.0.0.1:8000/courses/',
-                data={'name': 'Fdjsknde', 'students': Student.objects.all()[0].id}, format='json')
+def test_create(client, student_factory, course_factory):
+    students = student_factory(_quantity=2)
+    students_id = [i.id for i in students]
+    response = client.post('/courses/',
+                data={'name': 'Ffjjhiufy', 'students': students_id}, headers={"accept": "application/json"})
     assert response.status_code == 201
 
-
-#update и delete методы реализованы по документации, точно также, как и create выше. Вот он рабоатет, а эти нет по
-# неизвестной причине, несмотря на то, что в таком же виде в рамках одной функции работали штатно...
 
 @pytest.mark.django_db
 def test_update(client, student_factory, course_factory):
     students = student_factory(_quantity=2)
     courses = course_factory(_quantity=2)
-    for i, student in enumerate(students):
-        client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
-        for course in courses:
-            client.post('/courses/', data={'name': course.name, 'students_id': [1, 2]})
-    response = client.patch('/courses/3/', data={'name': 'django-new', 'students': [1, 2]})
+    course_id = courses[0].id
+    url = f"/courses/{course_id}/"
+    response = client.patch(url, data={'name': 'django-new', 'students': students[0].id})
     assert response.status_code == 200
 
 
@@ -115,16 +95,8 @@ def test_update(client, student_factory, course_factory):
 def test_remove(client, student_factory, course_factory):
     students = student_factory(_quantity=2)
     courses = course_factory(_quantity=2)
-    for i, student in enumerate(students):
-        client.post('/students/', data={'student_name': student.student_name, 'birth_date': '2003-05-03'})
-        for course in courses:
-            client.post('/courses/', data={'name': course.name, 'students_id': [1, 2]})
-    # response = client.delete('http://127.0.0.1:8000/courses/1/')
-    # assert response.status_code == 204
-
-    # response = client.post('/courses/', data={'name': 'DJANGO', 'students': [1, 2]})
-    # assert response.status_code == 201
-
-    response = client.delete('/courses/3/')
+    course_id = courses[0].id
+    url = f"/courses/{course_id}/"
+    response = client.delete(url)
     assert response.status_code == 204
 

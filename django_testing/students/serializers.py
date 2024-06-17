@@ -31,20 +31,12 @@ class CourseSerializer(serializers.ModelSerializer):
         return Course.objects.create(**validated_data)
 
     def update(self, instance, validated_data, partial=True):
-        students_data = validated_data.pop('students')
-        student = instance.students
 
         instance.name = validated_data.get(
                 'name', instance.name)
         instance.students = validated_data.get(
                 'students', instance.students)
         instance.save()
-
-        student.student_name = students_data.get(
-                'student_name', student.student_name)
-        student.birth_date = students_data.get(
-                'birth_date', student.birth_date)
-        student.save()
 
         return instance
 

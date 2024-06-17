@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c29590a7-dfcd-4f6b-9e1a-ba5eaef2fcc7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/students/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_testing/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_testing/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_testing/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_testing/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/students/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/students/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/students/test_courses_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/students/test_courses_api.py" afterDir="false" />
     </list>
