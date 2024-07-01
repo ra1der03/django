@@ -1,11 +1,9 @@
 name: Автоматизация развертывания
 on:
 	push:
-		branches:
-			- main
+		branches: [ main]
 	pull_request:
-    		branches:
-      			- main
+    		branches: [ main]
 jobs:
 	tests:
 		runs-on: ubuntu-20.04
