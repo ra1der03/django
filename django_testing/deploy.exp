@@ -1,0 +1,5 @@
+#!/bin/bash/expect
+spawn /home/user/django/django_testing/deploy.sh
+expect "password"
+send -- "1/r"
+expect eof
