@@ -13,7 +13,7 @@ jobs:
 			DB_PORT: ${{ secrets.DB_PORT }}
 		services:
 			postgres_main:
-				image: postgres:12
+				image: postgres: 12
 				env:
 					POSTGRES_DB: ${{ env.DB_NAME }}
 					POSTGRES_USER: ${{ env.DB_USER }}
@@ -27,19 +27,19 @@ jobs:
 				--health-retries 5
 			steps:
 				- name: Проверяем репозиторий на наличие изменений
-				  uses: actions/checkout@v4
+				uses: actions/checkout@v4
 				- name: Установка python
-				  uses: actions/setup-python@v5
-				  with: 
-				  python-version: "3.10"
+				uses: actions/setup-python@v5
+				with: 
+				python-version: "3.10"
 			        - name: Установка зависимостей
-				  run: pip install -r requirements.txt
+				run: pip install -r requirements.txt
 			        - name: Линтинг
-				  run: flake8 students/ --exclude students/migrations/
+				run: flake8 students/ --exclude students/migrations/
 				- name: Тестирование
-			          run: python manage.py test
-				  env:
-				  	SECRET_KEY: ${{ env.SECRET }}
+			        run: python manage.py test
+				env:
+					SECRET_KEY: ${{ env.SECRET }}
 					DEBUG: ${{ env.DEBUG }}
 					ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
                                         DB_ENGINE: ${{ env.DB_ENGINE }}
@@ -49,9 +49,9 @@ jobs:
                                         DB_HOST: ${{ env.DB_HOST }}
                                         DB_PORT: ${{ env.DB_PORT }}	 
 				- name: Деплой проекта
-				  uses: appleboy/ssh-action@main
-			          with:
-				  	host: ${{ secrets.SSH_HOST }}
+				uses: appleboy/ssh-action@main
+			        with:
+					host: ${{ secrets.SSH_HOST }}
 					username: ${{ secrets.SSH_USER }}
 					password: ${{ secrets.SSH_PASSWORD }}
 					script: expect /home/user/django/django_testing/deploy.exp
