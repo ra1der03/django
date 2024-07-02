@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
 	tests:
-  	runs-on: ubuntu-20.04
+    runs-on: ubuntu-20.04
 		env:
     	ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 	    SECRET: ${{ secrets.SECRET_KEY }}
