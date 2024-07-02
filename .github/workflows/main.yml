@@ -6,14 +6,14 @@ jobs:
 	tests:
     runs-on: ubuntu-20.04
 		env:
-    	ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+			ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
 	    SECRET: ${{ secrets.SECRET_KEY }}
 	    DEBUG: ${{ secrets.DEBUG_MODE }}
 	    HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-      DB_ENGINE: ${{ secrets.DB_ENGINE }}
+		 	DB_ENGINE: ${{ secrets.DB_ENGINE }}
 	    DB_NAME: ${{ secrets.DB_NAME }}
 	    DB_HOST: ${{ secrets.DB_HOST }}
-      DB_PORT: ${{ secrets.DB_PORT }}
+		 	DB_PORT: ${{ secrets.DB_PORT }}
 		services:
 	    postgres_main:
      		image: postgres: 13
