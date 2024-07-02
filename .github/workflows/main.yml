@@ -5,30 +5,30 @@ on: [push, pull_request]
 jobs:
     tests:
         runs-on: ubuntu-20.04
-	env:
+		env:
             ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
-	    SECRET: ${{ secrets.SECRET_KEY }}
-	    DEBUG: ${{ secrets.DEBUG_MODE }}
-	    HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+	    	SECRET: ${{ secrets.SECRET_KEY }}
+	    	DEBUG: ${{ secrets.DEBUG_MODE }}
+	    	HOSTS: ${{ secrets.ALLOWED_HOSTS }}
             DB_ENGINE: ${{ secrets.DB_ENGINE }}
-	    DB_NAME: ${{ secrets.DB_NAME }}
-	    DB_HOST: ${{ secrets.DB_HOST }}
+	    	DB_NAME: ${{ secrets.DB_NAME }}
+	    	DB_HOST: ${{ secrets.DB_HOST }}
             DB_PORT: ${{ secrets.DB_PORT }}
-	services:
+		services:
 	    postgres_main:
      	        image: postgres: 13
-	        env:
-	            POSTGRES_DB: ${{ env.DB_NAME }}
-		    POSTGRES_USER: ${{ env.DB_USER }}
-		    POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
-		ports:
-		    - 5432:5432
+	        	env:
+	            	POSTGRES_DB: ${{ env.DB_NAME }}
+		    		POSTGRES_USER: ${{ env.DB_USER }}
+		    		POSTGRES_PASSWORD: ${{ env.DB_PASSWORD }}
+				ports:
+		    		- 5432:5432
 		options:
-		    --health-cmd pg_isready
+			--health-cmd pg_isready
 		    --health-interval 5s
 		    --health-timeout 5s
 		    --health-retries 5
-	steps:
+		steps:
 	    - name: Проверяем репозиторий на наличие изменений
 	      uses: actions/checkout@v4
 	    - name: Установка python
@@ -45,6 +45,6 @@ jobs:
 	      uses: appleboy/ssh-action@main
 	      with:
 	          host: ${{ secrets.SSH_HOST }}
-		  username: ${{ secrets.SSH_USER }}
-		  password: ${{ secrets.SSH_PASSWORD }}
-		  script: expect /home/user/django/django_testing/deploy.exp
+		  	  username: ${{ secrets.SSH_USER }}
+		  	  password: ${{ secrets.SSH_PASSWORD }}
+		  	  script: expect /home/user/django/django_testing/deploy.exp
