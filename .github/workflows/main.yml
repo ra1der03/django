@@ -40,7 +40,7 @@ jobs:
       - name: Тестирование
         run: python django_testing/manage.py test
       - name: Деплой проекта
-        uses: appleboy/ssh-action@main
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
