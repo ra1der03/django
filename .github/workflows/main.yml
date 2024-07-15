@@ -40,6 +40,7 @@ jobs:
       - name: Тестирование
         run: python django_testing/manage.py test
       - name: Деплой проекта
+        run: chmod +x entrypoint.sh
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
