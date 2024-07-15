@@ -38,7 +38,7 @@ jobs:
       - name: Линтинг
         run: flake8 django_testing/students/ --exclude django_testing/students/migrations/
       - name: Тестирование
-        run: python django/django_testing/manage.py test
+        run: python django_testing/manage.py test
       - name: Деплой проекта
         uses: appleboy/ssh-action@master
         with:
