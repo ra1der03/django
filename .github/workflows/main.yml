@@ -36,7 +36,7 @@ jobs:
       - name: Установка зависимостей
         run: pip install -r django_testing/requirements.txt
       - name: Линтинг
-        run: flake8 django_testing/students/ --exclude students/migrations/
+        run: flake8 --exclude students/migrations/
       - name: Тестирование
         run: python manage.py test
       - name: Деплой проекта
