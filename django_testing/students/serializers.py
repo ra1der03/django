@@ -39,4 +39,3 @@ class CourseSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
-
